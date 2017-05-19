@@ -27,7 +27,7 @@ class CurlHelper{
      * @return mixed
      */
     public static function postJson($data,$url){
-        if(!isJson($data)){
+        if(is_array($data)){
             $data = json_encode($data,JSON_UNESCAPED_SLASHES);
         }
 
