@@ -28,9 +28,14 @@ class DebugController{
 
 
     public function show(){
+        $string = 'args=18815289976';
 
-        //SmsHelper::sendSms();
+        $content = SmsHelper::getSmsContent();
+        $mobile = '18815289976';
+        SmsHelper::sendSms($mobile,$content);
         //SmsHelper::fetchSms();
+
+        \Log::info('info');
     }
 
 }

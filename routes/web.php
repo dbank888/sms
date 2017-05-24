@@ -17,6 +17,8 @@ Route::resource('debug','DebugController');
 Route::get('init/import','DataInitializationController@import');
 Route::get('excel/import','ExcelController@import');
 
+Route::get('smsList','PageController@smsList');
+
 
 Route::get('/', function () {
     return view('welcome');

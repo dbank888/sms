@@ -58,8 +58,9 @@ class DataInitializationController{
         $fields = array_slice($fields,1,-2);
 
         $class = self::MODELS[$table];
-        $model = new $class();
+
         foreach($contents as $index => $line){
+            $model = new $class();
             foreach($fields as $key => $field){
                 $model->$field = $line[$key];
             }
@@ -81,10 +82,11 @@ class DataInitializationController{
      */
     protected function importCompany($table = 'company',$contents){
         $class = self::MODELS[$table];
-        $model = new $class();
+
         $total = count($contents);
         $error = 0;
         foreach($contents as $index => $line){
+            $model = new $class();
             $model->name = current($line);
             $model->car_id = next($line);
             $model->license = next($line);

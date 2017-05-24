@@ -35,19 +35,11 @@ class ExcelHelper  {
      * Excel文件导入功能
      */
     public static function import($table){
-        /*$suffix = ['.csv','.xls','.xlsx'];
-        foreach($suffix as $fix){
-            $file = storage_path('imports') . '／'.$table.$fix;
-            if(file_exists($file)){
-
-            }
-        }*/
-        $file =  storage_path('imports') . '/'.$table.'.csv';
+        $file =  storage_path('imports') . '/'.$table.'.xlsx';
         if(!file_exists($file)){
             return false;
         }
-        //$filePath = storage_path('imports') .'/保险公司导入模版.csv';
-        //$filePath = storage_path('imports') .'/服务商导入模板.xlsx';
+
         $data = Excel::load($file)->toArray();
 
         return $data;

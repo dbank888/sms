@@ -14,6 +14,10 @@ class SmsReceiveModel extends Model {
 
     protected $table = 'sms_receive';
 
+    public function send(){
+        return $this->hasOne('App\Models\SmsSendModel',"id","send_id");
+    }
+
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }

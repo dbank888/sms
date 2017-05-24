@@ -30,7 +30,7 @@ class OpenApiController {
         $receive_info = explode("#@#",$post);
 
         $sms_receive = new SmsReceiveModel();
-        $sms_receive->mobile = $receive_info[0];
+        $sms_receive->mobile = substr($receive_info[0],5);
         $content = $receive_info[1];
         $sms_receive->content = $content;
         $sms_receive->save();

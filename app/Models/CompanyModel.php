@@ -23,7 +23,7 @@ class CompanyModel extends Model {
 
     //关联服务商
     public function service(){
-        return $this->hasOne('\ServiceProvider',"id","service_id");
+        return $this->hasOne('App\Models\ServiceProviderModel',"id","service_id");
     }
 
     /**

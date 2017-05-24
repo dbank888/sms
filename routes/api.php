@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+//sms
+Route::any('sms/dataList','ApiSmsController@dataList');
+
 Route::any('receive','OpenApiController@receiveSms')->middleware('whiteList');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

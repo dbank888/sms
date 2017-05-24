@@ -14,7 +14,8 @@ use App\Models\ServiceProviderModel;
 class SmsHelper{
 
     public static function getSmsContent(){
-        return "[平安保险]出险车辆浙BS7V90，车架号为LSVAM4187C2184840，联系电话为18815289976，现位于浙江宁波市北仑区百丈东路118号附近。";
+        return "18815289976#@#[平安保险]出险车辆浙BS7V90，车架号为LSVAM4187C2184840，联系电话为18815289976，现位于浙江宁波市北仑区百丈东路118号附近。#@#";
+        //return "[平安保险]出险车辆浙BS7V90，车架号为LSVAM4187C2184840，联系电话为18815289976，现位于浙江宁波市北仑区百丈东路118号附近。";
     }
 
     public static function fetchSms(){
