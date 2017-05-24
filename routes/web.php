@@ -19,6 +19,7 @@ Route::get('excel/import','ExcelController@import');
 
 Route::get('smsList','PageController@smsList');
 
+Route::get('clearAllCache','CacheController@clearAllCache');
 
 Route::get('/', function () {
     return view('welcome');

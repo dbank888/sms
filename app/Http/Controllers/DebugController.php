@@ -20,7 +20,7 @@ class DebugController{
         $number = SmsHelper::getTargetNumber($content);
 
         if($number){
-            pp($number);
+            dump($number);
         }else{
             echo 'no found';
         }
