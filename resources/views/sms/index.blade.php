@@ -1,72 +1,81 @@
-{!! HTML::style('css/datatables.min.css') !!}
-{!! HTML::style('css/buttons.dataTables.min.css') !!}
+@extends('layouts.app')
 
-<style>
-    .datatable td {
-        overflow: hidden; /* this is what fixes the expansion */
-        text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
-        white-space: nowrap;
-        max-width: 200px;
-        text-align: center;
-    }
+@section('title', '短信记录')
 
-</style>
+@section('load_css')
+    {!! HTML::style('css/sms/datatables.min.css') !!}
+    {!! HTML::style('css/sms/buttons.dataTables.min.css') !!}
+@endsection
 
-{!! HTML::script('js/jquery-1.12.4.js') !!}
-{!! HTML::script('js/datatables.min.js') !!}
-{!! HTML::script('js/dataTables.buttons.min.js') !!}
-{!! HTML::script('js/buttons.flash.min.js') !!}
-{!! HTML::script('js/jszip.min.js') !!}
+@section('customize_css')
+    <style>
+        .datatable td {
+            overflow: hidden; /* this is what fixes the expansion */
+            text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
+            white-space: nowrap;
+            max-width: 200px;
+            text-align: center;
+        }
+    </style>
+@endsection
 
+@section('content')
+<div class="container">
+    <div>
+        <table id="sms-list" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>来电号码</th>
+                <th>内容</th>
+                <th>转发状态</th>
+                <th>接收时间</th>
+                <th>转发号码</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 
-<table id="sms-list" class="display" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>来电号码</th>
-        <th>内容</th>
-        <th>转发状态</th>
-        <th>接收时间</th>
-        <th>转发号码</th>
-    </tr>
-    </thead>
+</div><!-- /.container -->
+@endsection
 
-</table>
+@section('load_js')
+    {!! HTML::script('js/sms/datatables.min.js') !!}
+    {!! HTML::script('js/sms/dataTables.buttons.min.js') !!}
+    {!! HTML::script('js/sms/buttons.flash.min.js') !!}
+    {!! HTML::script('js/sms/jszip.min.js') !!}
+@endsection
 
-<script>
+@section('customize_js')
+    <script>
+        var BASE_PATH = '{{ $base_path }}';
 
-    var BASE_PATH = '{{ $base_path }}';
+        $(document).ready(function() {
+            $('#sms-list').DataTable({
+                "ajax": BASE_PATH + '/api/sms/dataList',
+                "sPaginationType": "full_numbers",
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
 
-
-
-    $(document).ready(function() {
-        $('#sms-list').DataTable({
-            "ajax": BASE_PATH + '/api/sms/dataList',
-            "sPaginationType": "full_numbers",
-            dom: 'Bfrtip',
-            buttons: [
-                'excel'
-            ],
-
-            "columns": [
-                { "data": "mobile" },
-                { "data": "content" },
-                { "data": "send_status" },
-                { "data": "created_at" },
-                { "data": "send_mobile"},
-            ],
-        });
-
-        setTimeout(function(){
-            $('.datatable tbody td').each(function(){
-                var titleVal = $(this).text();
-                if (typeof titleVal === "string" && titleVal !== '') {
-                    $(this).attr('title', titleVal);
-                }
+                "columns": [
+                    { "data": "mobile" },
+                    { "data": "content" },
+                    { "data": "send_status" },
+                    { "data": "created_at" },
+                    { "data": "send_mobile"},
+                ],
             });
-        },500);
 
+            setTimeout(function(){
+                $('.datatable tbody td').each(function(){
+                    var titleVal = $(this).text();
+                    if (typeof titleVal === "string" && titleVal !== '') {
+                        $(this).attr('title', titleVal);
+                    }
+                });
+            },500);
+        } );
+    </script>
+@endsection
 
-    } );
-
-
-</script>

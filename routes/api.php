@@ -12,9 +12,19 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//Tool
+Route::any('clearAllCache','ToolController@clearAllCache');
 
 //sms
-Route::any('sms/dataList','ApiSmsController@dataList');
+Route::post('sms/dataList','ApiSmsController@dataList');
+
+//company
+Route::post('company/dataList','ApiCompanyController@dataList');
+Route::post('company/createConf','ApiCompanyController@createConf');
+Route::post('company/store','ApiCompanyController@store');
+Route::post('company/editInfo','ApiCompanyController@editInfo');
+Route::post('company/update','ApiCompanyController@update');
+Route::post('company/delete','ApiCompanyController@delete');
 
 Route::any('receive','OpenApiController@receiveSms')->middleware('whiteList');
 

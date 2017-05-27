@@ -24,7 +24,7 @@ class whiteList
 
         $ip = \Request::server('REMOTE_ADDR');
         $ip_head = substr($ip,0,3);
-        $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+        $ua = strtolower(\Request::server('HTTP_USER_AGENT'));
 
         //过滤内部ip和网络爬虫
         if (!(in_array($ip, $access_ips) || in_array($ip_head,array('192','10.')) || is_numeric(strpos($ua,'spider')) )){

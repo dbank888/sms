@@ -8,10 +8,9 @@
 
 namespace App\Http\Controllers;
 
-class CacheController{
+class ToolController{
     public static function clearAllCache(){
         $exitCode = \Artisan::call('cache:clear');
         echo 'clear All Cache';
-        //return true;
     }
 }

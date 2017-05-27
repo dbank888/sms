@@ -53,13 +53,14 @@ namespace {
         /**
          * @param $data
          * @param string $msg
+         * @param string $url
          * @return \Illuminate\Http\JsonResponse
          */
-        function responseSuccess($data = true, $msg = ""){
+        function responseSuccess($data = true, $msg = "", $url = ""){
             if(strlen($msg) > 0){
-                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'msg' => $msg]);
+                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'msg' => $msg, 'url' => $url]);
             }else{
-                return Response::json(['status' => CODE_SUCCESS, 'data' => $data]);
+                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'url' => $url]);
             }
         }
     }
@@ -83,8 +84,8 @@ namespace {
          * @return bool
          */
         function accessLog($msg = ''){
-            $info = Request::server('REMOTE_ADDR'). ' call open api function '. Input::get('atn').'--'.$msg;
-            Log::info($info,Input::all());
+            $info = \Request::server('REMOTE_ADDR'). ' call open api function '. Input::get('atn').'--'.$msg;
+            Log::info($info,\Request::all());
             return true;
         }
     }
@@ -96,7 +97,7 @@ namespace {
          * @return bool
          */
         function errorLog($msg){
-            Log::error("open api errorMsg:".$msg,Input::all());
+            Log::error("Ip:".\Request::ip().",send request:".\Request::fullUrl()." failed, ErrorMsg:".$msg,\Request::all());
             return true;
         }
 

@@ -11,18 +11,21 @@
 |
 */
 
+Route::resource('company','CompanyController');
+
+Route::get('smsList','PageController@smsList');
+
 //调试路由
 Route::resource('debug','DebugController');
 
+//Excel 导入导出
 Route::get('init/import','DataInitializationController@import');
 Route::get('excel/import','ExcelController@import');
-
-Route::get('smsList','PageController@smsList');
 
 Route::get('clearAllCache','CacheController@clearAllCache');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->middleware('whiteList');
 
 
