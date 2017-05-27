@@ -71,6 +71,7 @@ class ApiCompanyController{
             }
             $this->company->mobile = ServiceProviderModel::where(['id' => $post['service_id']])->first()->mobile;
             $this->company->save();
+            $this->company->clearAllCache();
 
         }catch (\Exception $ex){
             return responseError(CODE_PARAMETER_ERROR,$ex->getMessage());
@@ -111,6 +112,7 @@ class ApiCompanyController{
         }
         $this->company->mobile = ServiceProviderModel::where(['id' => $post['service_id']])->first()->mobile;
         $this->company->save();
+        $this->company->clearAllCache();
 
         return responseSuccess([],'修改成功', \Request::root().'\company');
     }
@@ -122,6 +124,7 @@ class ApiCompanyController{
     public function delete(){
         $id = \Request::get('id');
         $this->company->destroy($id);
+        $this->company->clearAllCache();
         return responseSuccess([],'删除成功');
     }
 

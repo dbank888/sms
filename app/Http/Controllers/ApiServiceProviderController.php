@@ -53,6 +53,7 @@ class ApiServiceProviderController{
                 $this->service_provider->$key = $post[$key];
             }
             $this->service_provider->save();
+            $this->service_provider->clearAllCache();
 
         }catch (\Exception $ex){
             return responseError(CODE_PARAMETER_ERROR,$ex->getMessage());
@@ -91,6 +92,7 @@ class ApiServiceProviderController{
             $this->service_provider->$key = $val;
         }
         $this->service_provider->save();
+        $this->service_provider->clearAllCache();
 
         return responseSuccess([],'修改成功', \Request::root().'\service');
     }
@@ -102,6 +104,7 @@ class ApiServiceProviderController{
     public function delete(){
         $id = \Request::get('id');
         $this->service_provider->destroy($id);
+        $this->service_provider->clearAllCache();
         return responseSuccess([],'删除成功');
     }
 

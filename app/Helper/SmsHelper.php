@@ -103,23 +103,23 @@ class SmsHelper{
 
             foreach ($service_providers as &$provider) {
                 $provider['hit'] = 0;
-                if (false !== strpos($content, $provider['province'])) {
+                if (!empty($provider['province']) && false !== strpos($content, $provider['province'])) {
                     $provider['hit'] ++;
                 }
 
-                if (false !== strpos($content, $provider['city'])) {
+                if (!empty($provider['city']) && false !== strpos($content, $provider['city'])) {
                     $provider['hit'] ++;
                 }
 
-                if (false !== strpos($content, $provider['district'])) {
+                if (!empty($provider['district']) && false !== strpos($content, $provider['district'])) {
                     $provider['hit'] ++;
                 }
 
-                if (false !== strpos($content, $provider['street'])) {
+                if (!empty($provider['street']) && false !== strpos($content, $provider['street'])) {
                     $provider['hit'] ++;
                 }
 
-                if (false !== strpos($content, $provider['road'])) {
+                if (!empty($provider['road']) && false !== strpos($content, $provider['road'])) {
                     $provider['hit'] ++;
                 }
             }

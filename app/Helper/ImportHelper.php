@@ -70,7 +70,7 @@ class ImportHelper{
                 }
             }
         }
-
+        $model->clearAllCache();
         return responseSuccess(true,$error_msg.$table."成功导入".($total - $error) ."条数据");
     }
 
@@ -113,6 +113,7 @@ class ImportHelper{
                 }
             }
         }
+        $model->clearAllCache();
         return responseSuccess(true,$error_msg.$table."成功导入".($total - $error) ."条数据");
     }
 }
