@@ -57,4 +57,16 @@ class ServiceProviderModel extends Model{
         \Cache::forget(self::CACHE_SERVICE_LIST);
     }
 
+    public static function boot(){
+        parent::boot();
+
+        self::saving(function($model){
+            foreach ($model->attributes as $key => $value)
+                if (is_null($value))
+                    $model->$key = "";
+
+            return true;
+        });
+    }
+
 }

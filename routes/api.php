@@ -25,9 +25,18 @@ Route::post('company/store','ApiCompanyController@store');
 Route::post('company/editInfo','ApiCompanyController@editInfo');
 Route::post('company/update','ApiCompanyController@update');
 Route::post('company/delete','ApiCompanyController@delete');
+Route::post('company/import','ApiCompanyController@import');
+
+//service_provider
+Route::post('service/dataList','ApiServiceProviderController@dataList');
+Route::post('service/store','ApiServiceProviderController@store');
+Route::post('service/editInfo','ApiServiceProviderController@editInfo');
+Route::post('service/update','ApiServiceProviderController@update');
+Route::post('service/delete','ApiServiceProviderController@delete');
+Route::post('service/import','ApiServiceProviderController@import');
 
 Route::any('receive','OpenApiController@receiveSms')->middleware('whiteList');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/

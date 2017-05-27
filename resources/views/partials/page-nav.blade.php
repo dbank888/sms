@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">首页</a></li>
                 <li id="nav-company"><a href="/company">保险公司</a></li>
-                <li id="nav-service"><a href="/serviceList">服务商</a></li>
+                <li id="nav-service"><a href="/service">服务商</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:history.back()">返回</a></li>

@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\CommonHelper;
+use App\Helper\ImportHelper;
 use App\Models\CompanyModel;
 use App\Models\ServiceProviderModel;
 
@@ -71,7 +73,7 @@ class ApiCompanyController{
             $this->company->save();
 
         }catch (\Exception $ex){
-            return responseError($ex->getCode(),$ex->getMessage());
+            return responseError(CODE_PARAMETER_ERROR,$ex->getMessage());
         }
 
         return responseSuccess([],'新建成功', \Request::root().'\company');
@@ -119,9 +121,16 @@ class ApiCompanyController{
      */
     public function delete(){
         $id = \Request::get('id');
-
-        CompanyModel::destroy($id);
-
+        $this->company->destroy($id);
         return responseSuccess([],'删除成功');
+    }
+
+    /**
+     * 数据批量导入
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function import(){
+        $content = \Request::get('content');
+        return ImportHelper::importCompany('company',CommonHelper::convertContent($content));
     }
 }

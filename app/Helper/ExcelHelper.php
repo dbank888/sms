@@ -10,7 +10,7 @@ namespace App\Helper;
 
 use Maatwebsite\Excel\Facades\Excel;
 
-class ExcelHelper  {
+class ExcelHelper{
 
     /**
      * Excel文件导出功能

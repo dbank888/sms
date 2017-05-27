@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/serivceList">
+                    <a href="/service">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-blog"></i>
 								</span>

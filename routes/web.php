@@ -12,6 +12,7 @@
 */
 
 Route::resource('company','CompanyController');
+Route::resource('service','ServiceProviderController');
 
 Route::get('smsList','PageController@smsList');
 

@@ -1,8 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Maple.xia
+ * Date: 27/05/2017
+ * Time: 10:12 AM
+ */
 
 namespace App\Http\Controllers;
 
-class CompanyController{
+class ServiceProviderController{
     /**
      * Display a listing of the resource.
      *
@@ -10,7 +16,7 @@ class CompanyController{
      */
     public function index()
     {
-        return \Response::view('company.index');
+        return \Response::view('service.index');
     }
 
     /**
@@ -20,7 +26,7 @@ class CompanyController{
      */
     public function create()
     {
-        return \Response::view('company.create');
+        return \Response::view('service.create');
     }
 
     /**
@@ -29,7 +35,7 @@ class CompanyController{
      */
     public function edit($id)
     {
-        return \Response::view('company.edit',['company_id' => $id]);
+        return \Response::view('service.edit',['service_id' => $id]);
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '新建公司记录')
+@section('title', '新建保险公司')
 
 
 @section('load_css')
@@ -81,10 +81,10 @@
                 url: base_path + "/api/company/store",
                 data: _values,
                 error: function (request) {
-                    alert(request.responseJSON.ErrorMsg);
+                    error(request.responseJSON.ErrorMsg);
                 },
                 success: function (rtn){
-                    alert(rtn.msg);
+                    success(rtn.msg);
                     window.setTimeout(function(){
                         if ( rtn.url != undefined ) {
                             window.location.href = rtn.url;

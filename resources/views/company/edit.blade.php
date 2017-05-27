@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '编辑公司记录')
+@section('title', '编辑信息')
 
 
 @section('load_css')
@@ -52,7 +52,7 @@
     <script>
         $(document).ready(function() {
             //global params
-            var company_id = '{!! $company_id !!}}';
+            var company_id = '{!! $company_id !!}';
 
             //init data
             loadConfig();
@@ -62,7 +62,7 @@
                 url: base_path + '/api/company/editInfo',
                 data: {id:company_id},
                 error: function (request) {
-                    alert(request.responseJSON.ErrorMsg);
+                    error(request.responseJSON.ErrorMsg);
                 },
                 success: function (rs){
                     $.each(rs.data.info,function(index,value){
@@ -88,7 +88,7 @@
                 url: base_path + "/api/company/createConf",
                 dataType: "json",
                 error: function (request) {
-                    alert(request.responseJSON.ErrorMsg);
+                    error(request.responseJSON.ErrorMsg);
                 },
                 success: function (rs) {
                     var item = rs.data;
@@ -111,10 +111,10 @@
                 url: base_path + "/api/company/update",
                 data: _values,
                 error: function (request) {
-                    alert(request.responseJSON.ErrorMsg);
+                    error(request.responseJSON.ErrorMsg);
                 },
                 success: function (rtn){
-                    alert(rtn.msg);
+                    success(rtn.msg);
                     window.setTimeout(function(){
                         if ( rtn.url != undefined ) {
                             window.location.href = rtn.url;

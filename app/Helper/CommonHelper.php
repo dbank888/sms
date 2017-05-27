@@ -36,4 +36,26 @@ class CommonHelper
         return $number;
     }
 
+    /**
+     * 将文本内容转成数据
+     * @param $input
+     * @return array
+     */
+    public static function convertContent($input){
+        $content_arr = explode("\n",$input);
+        array_shift($content_arr);
+
+        $output = [];
+        foreach($content_arr as $str){
+            $end = substr($str,-1,1);
+            if($end == "\t"){
+                $output[] = explode("\t",substr($str,0,-1));
+            }else{
+                $output[] = explode("\t",$str);
+            }
+        }
+
+        return $output;
+    }
+
 }

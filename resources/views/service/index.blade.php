@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '保险公司列表')
+@section('title', '服务商列表')
 
 @section('load_css')
     {!! HTML::style('css/sms/datatables.min.css') !!}
@@ -28,7 +28,7 @@
 @section('content')
     <div class="container">
         <div class="header clearfix">
-            <h3 class="text-muted txt-center">保险公司信息列表</h3>
+            <h3 class="text-muted txt-center">服务商信息列表</h3>
             <button type="button" class="btn btn-primary btn-import" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入
             </button>
@@ -41,7 +41,7 @@
                             <h4 class="modal-title" id="myModalLabel">数据批量导入</h4>
                         </div>
                         <div class="modal-body">
-                            <a class="btn btn-primary pull-right" href="/download/company.xlsx">
+                            <a class="btn btn-primary pull-right" href="/download/service_provider.xlsx">
                                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 下载导入模版
                             </a>
                             <textarea id="import-content" class="form-control" rows="12" placeholder="必填项，下载填写模板文件，选择需要导入条目复制粘贴到本输入框"></textarea>
@@ -58,16 +58,17 @@
             </a>
         </div>
         <div style="margin: 10px;">
-            <table id="company-list" class="table table-hover table-striped">
+            <table id="service-list" class="table table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>保险公司</th>
-                    <th>车架号</th>
-                    <th>车牌号</th>
                     <th>服务商</th>
                     <th>联系方式</th>
-                    <th>修改时间</th>
-                    <th>操作</th>
+                    <th>优先级</th>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>区</th>
+                    <th>街道</th>
+                    <th>道路</th>
                 </tr>
                 </thead>
                 <tbody id="list_content">
@@ -107,10 +108,10 @@
         $(document).ready(function() {
 
             //event
-            $("#nav-company").addClass('active');
+            $("#nav-service").addClass('active');
             $("#list-rows").change(function(){
                 loadList(1);
-            })
+            });
 
             $("#import").click(function(){
                 var _content = $('#import-content').val();
@@ -120,7 +121,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: base_path + "/api/company/import",
+                    url: base_path + "/api/service/import",
                     data: {content:_content},
                     dataType: "json",
                     error: function (request) {
@@ -138,7 +139,7 @@
                 if(window.confirm('是否确认删除？')){
                     $.ajax({
                         type: "POST",
-                        url: base_path + "/api/company/delete",
+                        url: base_path + "/api/service/delete",
                         data: {id:$(this).attr('tag')},
                         dataType: "json",
                         success: function(rs){
@@ -159,7 +160,7 @@
 
             $.ajax({
                 type: "POST",
-                url: base_path + "/api/company/dataList",
+                url: base_path + "/api/service/dataList",
                 data: {page:page,listRows:_listRows},
                 dataType: "json",
                 error: function (request) {
@@ -171,18 +172,20 @@
                     $content.empty();
                     var html = '';
                     if(false == item){
-                        var colspan = $("#company-list th").length;
+                        var colspan = $("#service-list th").length;
                         html += '<tr><td colspan="'+ colspan +'" style="text-align: center;color: #999;">No records found</td></tr>';
                     }else{
                         for(var i=0;i<item.length;i++){
                             html+='<tr>';
                             html+="<td>"+item[i]['name']+"</td>";
-                            html+="<td>"+item[i]['car_id']+"</td>";
-                            html+="<td>"+item[i]['license']+"</td>";
-                            html+="<td>"+item[i]['service']['name']+"</td>";
                             html+="<td>"+item[i]['mobile']+"</td>";
-                            html+="<td>"+item[i]['updated_at']+"</td>";
-                            html+= '<td><a class="btn btn-info" href="company/' + item[i]['id'] + '/edit" >编辑</a>' +
+                            html+="<td>"+item[i]['priority']+"</td>";
+                            html+="<td>"+item[i]['province']+"</td>";
+                            html+="<td>"+item[i]['city']+"</td>";
+                            html+="<td>"+item[i]['district']+"</td>";
+                            html+="<td>"+item[i]['street']+"</td>";
+                            html+="<td>"+item[i]['road']+"</td>";
+                            html+= '<td><a class="btn btn-info" href="service/' + item[i]['id'] + '/edit" >编辑</a>' +
                                 '<a class="btn btn-danger del" style="margin-left: 20px;" tag="'+ item[i]['id'] +'">删除</a></td>'
                             html+="</tr>";
                         }
