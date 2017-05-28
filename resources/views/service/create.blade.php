@@ -21,21 +21,26 @@
             <form id="service-form">
                 <div class="form-group">
                     <label for="name">服务商名称</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="名称" />
+                    <input type="text" class="form-control" id="name" name="name" placeholder="名称 (必填项)"
+                           data-error="请填写服务商名称" required/>
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
                     <label for="car_id">联系方式</label>
-                    <input type="text" class="form-control" id="mobile" name="mobile" placeholder="联系方式" />
+                    <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="手机号码 (必填项)"
+                           pattern="^1[3458]{1}\d{9}$" data-error="请填写正确手机号" required/>
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
                     <label for="license">优先级</label>
-                    <select multiple class="form-control" id="priority" name="priority">
+                    <select multiple class="form-control" id="priority" name="priority"  data-error="请选择优先级" required>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
                     <label for="server_id">省份</label>
@@ -58,7 +63,9 @@
                     <input type="text" class="form-control" id="road" name="road" placeholder="道路" />
                 </div>
 
-                <input id="submit" type="button" class="btn btn-default" value="提交" />
+                <div class="form-group">
+                    <button id="submit" type="submit" class="btn btn-primary">提交</button>
+                </div>
             </form>
         </div>
     </div><!-- /.container -->
@@ -72,8 +79,13 @@
 @section('customize_js')
     <script>
         $(document).ready(function() {
-            $('#submit').click(function(){
-                create();
+            $('#service-form').validator().on('submit', function (e) {
+                if (e.isDefaultPrevented()) {
+                    //alert('form is not valid');
+                } else {
+                    e.preventDefault();
+                    create();
+                }
             });
 
         });

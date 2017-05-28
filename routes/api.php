@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::any('clearAllCache','ToolController@clearAllCache');
 
 //sms
-Route::post('sms/dataList','ApiSmsController@dataList');
+Route::any('sms/dataList','ApiSmsController@dataList');
 
 //company
 Route::post('company/dataList','ApiCompanyController@dataList');

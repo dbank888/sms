@@ -25,8 +25,19 @@ Route::get('excel/import','ExcelController@import');
 
 Route::get('clearAllCache','CacheController@clearAllCache');
 
-Route::get('/', function () {
+//laravel
+Route::get('laravel', function () {
+    return view('welcome');
+});
+
+Route::get('home', function () {
     return view('home');
+});
+
+
+
+Route::get('/', function () {
+    return view('index.index');
 })->middleware('whiteList');
 
 

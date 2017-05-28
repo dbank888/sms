@@ -40,20 +40,26 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">数据批量导入</h4>
                         </div>
-                        <div class="modal-body">
-                            <a class="btn btn-primary pull-right" href="/download/company.xlsx">
-                                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 下载导入模版
-                            </a>
-                            <textarea id="import-content" class="form-control" rows="12" placeholder="必填项，下载填写模板文件，选择需要导入条目复制粘贴到本输入框"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button id="import" type="button" class="btn btn-primary">导入</button>
-                        </div>
+                        <form id="import-form">
+                            <div class="modal-body">
+                                <a class="btn btn-primary pull-right" href="/download/company.xlsx">
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 下载导入模版
+                                </a>
+                                <div class="form-group">
+                                    <textarea id="import-content" class="form-control" rows="10"
+                                              placeholder="必填项，下载填写模板文件，选择需要导入条目复制粘贴到本输入框"  data-error="请填写导入条目" required></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="import" type="submit" class="btn btn-primary">导入</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <a class="btn btn-success btn-new" href="/service/create">
+            <a class="btn btn-success btn-new" href="/company/create">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
             </a>
         </div>
@@ -76,24 +82,7 @@
             </table>
         </div>
 
-        <div style="margin: 20px 0;display: inline-block;">
-            <label>Show </label>
-            <select id="list-rows" aria-controls="user-list" class="">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <label>entries</label>
-        </div>
-        <div class="pagination pull-right">
-            <a href="#" class="first" data-action="first">&laquo;</a>
-            <a href="#" class="previous" data-action="previous">&lsaquo;</a>
-            <input type="text" readonly="readonly" data-max-page="40" />
-            <a href="#" class="next" data-action="next">&rsaquo;</a>
-            <a href="#" class="last" data-action="last">&raquo;</a>
-        </div>
-
+        @include('partials.pageination')
     </div><!-- /.container -->
 @endsection
 
@@ -112,26 +101,26 @@
                 loadList(1);
             })
 
-            $("#import").click(function(){
-                var _content = $('#import-content').val();
-                if(_content.length == 0){
-                    error('内容不能为空');
-                    return false;
+            $('#import-form').validator().on('submit', function (e) {
+                if (e.isDefaultPrevented()) {
+                    //alert('form is not valid');
+                } else {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        url: base_path + "/api/company/import",
+                        data: {content:_content},
+                        dataType: "json",
+                        error: function (request) {
+                            info(request.responseJSON.ErrorMsg);
+                        },
+                        success: function(rs){
+                            loadList(1);
+                            $('#myModal').modal('hide');
+                            success(rs.msg);
+                        }
+                    });
                 }
-                $.ajax({
-                    type: "POST",
-                    url: base_path + "/api/company/import",
-                    data: {content:_content},
-                    dataType: "json",
-                    error: function (request) {
-                        info(request.responseJSON.ErrorMsg);
-                    },
-                    success: function(rs){
-                        loadList(1);
-                        $('#myModal').modal('hide');
-                        success(rs.msg);
-                    }
-                });
             });
 
             $(document).on("click", ".del", function(){
@@ -190,6 +179,7 @@
 
                     //pagination
                     $('.pagination').jqPagination({
+                        page_string: ' {current_page}／{max_page} 页 ',
                         max_page:rs.data.max_page,
                         paged: function(page) {
                             // do something with the page variable

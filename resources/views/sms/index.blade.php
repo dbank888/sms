@@ -9,13 +9,14 @@
 
 @section('customize_css')
     <style>
-        .datatable td {
+        table td,th {
             overflow: hidden; /* this is what fixes the expansion */
             text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
             white-space: nowrap;
-            max-width: 200px;
+            max-width: 200px!important;
             text-align: center;
         }
+
     </style>
 @endsection
 
@@ -68,7 +69,7 @@
             });
 
             setTimeout(function(){
-                $('.datatable tbody td').each(function(){
+                $('table tbody td').each(function(){
                     var titleVal = $(this).text();
                     if (typeof titleVal === "string" && titleVal !== '') {
                         $(this).attr('title', titleVal);

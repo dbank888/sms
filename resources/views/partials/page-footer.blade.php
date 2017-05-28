@@ -1,10 +1,5 @@
-<hr>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="pull-right">
-                <p class="copyright">Copyright © Maple.xia</p>
-            </div>
-        </div>
+<footer class="footer">
+    <div class="container ">
+        <p class="text-muted ">&copy; Create By Maple.Xia</p>
     </div>
 </footer>

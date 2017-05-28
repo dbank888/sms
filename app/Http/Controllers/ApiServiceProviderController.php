@@ -44,17 +44,15 @@ class ApiServiceProviderController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(){
+        //todo: 重名验证
         $post = \Request::all();
         $keys = ['name','mobile','priority','province','city','district','street','road'];
         try{
-            //checkEmpty($post,$keys);
-
             foreach($keys as $key){
                 $this->service_provider->$key = $post[$key];
             }
             $this->service_provider->save();
             $this->service_provider->clearAllCache();
-
         }catch (\Exception $ex){
             return responseError(CODE_PARAMETER_ERROR,$ex->getMessage());
         }
