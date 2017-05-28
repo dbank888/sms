@@ -27,14 +27,16 @@ Route::get('clearAllCache','CacheController@clearAllCache');
 
 //laravel
 Route::get('laravel', function () {
-    return view('welcome');
+    return view('page.welcome');
 });
 
 Route::get('home', function () {
-    return view('home');
+    return view('page.home');
 });
 
-
+Route::get('calendar', function () {
+    return view('page.calendar');
+});
 
 Route::get('/', function () {
     return view('index.index');

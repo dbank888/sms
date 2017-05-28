@@ -19,6 +19,9 @@
 
         <div style="margin: 10px;">
             <form id="service-form">
+                <a class="btn btn-success" href="/service" style="margin-bottom: 10px;">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回列表
+                </a>
                 <div class="form-group">
                     <label for="name">服务商名称</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="名称 (必填项)"
@@ -65,7 +68,7 @@
 
                 <div class="form-group">
                     <input id="id" name="id" type="hidden" />
-                    <button id="submit" type="submit" class="btn btn-primary">提交</button>
+                    <button id="submit" type="submit" class="btn btn-primary pull-right">提交</button>
                 </div>
             </form>
         </div>

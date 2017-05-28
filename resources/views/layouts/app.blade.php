@@ -12,16 +12,10 @@
 
 
     <!-- Bootstrap core CSS -->
-    {!! HTML::style('css/bootstrap.min.css') !!}
+    @include('partials.css_basic')
     @yield('load_css')
 
     @yield('customize_css')
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    {!! HTML::script('js/html5shiv.min.js') !!}
-    {!! HTML::script('js/respond.min.js') !!}
-    <![endif]-->
 </head>
 
 <body>

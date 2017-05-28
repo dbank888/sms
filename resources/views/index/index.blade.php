@@ -8,23 +8,14 @@
     <meta name="keywords" content="sms" />
     <meta name="author" content="maple.xia" />
 
-    <title> @yield('title')</title>
+    <title>首页</title>
 
-    <!-- Bootstrap core CSS -->
-    {!! HTML::style('css/bootstrap.min.css') !!}
-    {!! HTML::style('css/bootstrap-overrides.css') !!}
+    @include('partials.css_basic')
 
     {{--page--}}
     {!! HTML::style('css/index/layout.css') !!}
     {!! HTML::style('css/index/elements.css') !!}
     {!! HTML::style('css/index/page.css') !!}
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    {!! HTML::script('js/html5shiv.min.js') !!}
-    {!! HTML::script('js/respond.min.js') !!}
-    <![endif]-->
 </head>
 <body>
 

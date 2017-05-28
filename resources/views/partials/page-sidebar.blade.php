@@ -35,7 +35,7 @@
         </li>
 
         <li class="nav-personInfo">
-            <a href="" target="mainFrame" >
+            <a href="/personInfo" target="mainFrame" >
                 <i class="glyphicon glyphicon-info-sign"></i>
                 <span>我的信息</span>
             </a>
