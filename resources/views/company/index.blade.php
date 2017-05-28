@@ -3,7 +3,6 @@
 @section('title', '保险公司列表')
 
 @section('load_css')
-    {!! HTML::style('css/sms/datatables.min.css') !!}
     {!! HTML::style('vendor/jqPagination/css/jqpagination.css') !!}
 @endsection
 
@@ -13,9 +12,6 @@
             text-align: center;
         }
 
-        .txt-center{
-            text-align: center;
-        }
 
         .btn-new, .btn-import{
             float: right!important;
@@ -28,7 +24,7 @@
 @section('content')
     <div class="container">
         <div class="header clearfix">
-            <h3 class="text-muted txt-center">保险公司信息列表</h3>
+            <h3 class="text-muted text-center">保险公司信息列表</h3>
             <button type="button" class="btn btn-primary btn-import" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入
             </button>
@@ -109,7 +105,7 @@
                     $.ajax({
                         type: "POST",
                         url: base_path + "/api/company/import",
-                        data: {content:_content},
+                        data: {content:$('#import-content').val()},
                         dataType: "json",
                         error: function (request) {
                             info(request.responseJSON.ErrorMsg);

@@ -96,6 +96,13 @@ class ImportHelper{
                 $model->car_id = next($line);
                 $model->license = next($line);
 
+                $exist = $model->where(['license' => $model->license])
+                    ->orWhere(['car_id' => $model->car_id])->first();
+                if($exist){
+                    $error ++;
+                    $error_msg .= '第'.(++$index).'行数据导入失败<br/>';
+                }
+
                 $service = ServiceProviderModel::where(['name' => next($line)])->first();
                 if(!$service){
                     $exist = ServiceProviderModel::all()->toArray();

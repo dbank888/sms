@@ -65,6 +65,15 @@ class ApiCompanyController{
         $keys = ['name','car_id','license','service_id'];
         try{
             checkEmpty($post,$keys);
+            $exist = $this->company->where(['car_id' => $post['car_id']])->first();
+            if($exist){
+                throw new \Exception('车架号已存在');
+            }
+
+            $exist = $this->company->where(['license' => $post['license']])->first();
+            if($exist){
+                throw new \Exception('车牌号已存在');
+            }
 
             foreach($keys as $key){
                 $this->company->$key = $post[$key];
@@ -104,6 +113,18 @@ class ApiCompanyController{
         $post = \Request::all();
         if(empty($post['id'])){
             return responseError(CODE_PARAMETER_ERROR,'id缺失');
+        }
+
+        $exist = $this->company->where(['car_id' => $post['car_id']])
+            ->where('id','!=',$post['id'])->first();
+        if($exist){
+            return responseError(CODE_PARAMETER_ERROR,'车架号已存在');
+        }
+
+        $exist = $this->company->where(['license' => $post['license']])
+            ->where('id','!=',$post['id'])->first();
+        if($exist){
+            return responseError(CODE_PARAMETER_ERROR,'车牌号已存在');
         }
 
         $this->company = $this->company->find($post['id']);

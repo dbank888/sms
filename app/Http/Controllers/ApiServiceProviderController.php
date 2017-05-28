@@ -44,10 +44,14 @@ class ApiServiceProviderController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(){
-        //todo: 重名验证
         $post = \Request::all();
         $keys = ['name','mobile','priority','province','city','district','street','road'];
         try{
+            $exist = $this->service_provider->where(['name' => $post['name']])->first();
+            if($exist){
+                throw new \Exception('服务商已存在');
+            }
+
             foreach($keys as $key){
                 $this->service_provider->$key = $post[$key];
             }
@@ -85,6 +89,12 @@ class ApiServiceProviderController{
             return responseError(CODE_PARAMETER_ERROR,'id缺失');
         }
 
+        $exist = $this->service_provider->where(['name' => $post['name']])
+            ->where('id','!=',$post['id'])->first();
+        if($exist){
+            return responseError(CODE_PARAMETER_ERROR,'服务商已存在');
+        }
+
         $this->service_provider = $this->service_provider->find($post['id']);
         foreach($post as $key => $val){
             $this->service_provider->$key = $val;
@@ -112,6 +122,31 @@ class ApiServiceProviderController{
      */
     public function import(){
         $content = \Request::get('content');
-        return ImportHelper::importData('service_provider',CommonHelper::convertContent($content));
+        $content_arr = CommonHelper::convertContent($content);
+
+        for ($i=0;$i<count($content_arr);$i++) {
+            $exist = $this->service_provider->where(['name' => $content_arr[$i][0]])->first();
+            if($exist){
+                unset($content_arr[$i]);
+            }else{
+                for ($j=$i+1;$j<count($content_arr);$j++) {
+                    if ($content_arr[$j][0] == $content_arr[$i][0]) {
+                        unset($content_arr[$j]);
+                    }
+                }
+            }
+        }
+
+        foreach($content_arr as $index =>  $arr){
+            $exist = $this->service_provider->where(['name' => $arr[0]])->first();
+            if($exist){
+                unset($content_arr[$index]);
+            }
+        }
+        if($content_arr){
+            return ImportHelper::importData('service_provider',$content_arr);
+        }else{
+            return responseError(CODE_PARAMETER_ERROR,'导入信息已存在');
+        }
     }
 }

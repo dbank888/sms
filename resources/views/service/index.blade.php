@@ -3,17 +3,12 @@
 @section('title', '服务商列表')
 
 @section('load_css')
-    {!! HTML::style('css/sms/datatables.min.css') !!}
     {!! HTML::style('vendor/jqPagination/css/jqpagination.css') !!}
 @endsection
 
 @section('customize_css')
     <style>
         .table td,th {
-            text-align: center;
-        }
-
-        .txt-center{
             text-align: center;
         }
 
@@ -28,7 +23,7 @@
 @section('content')
     <div class="container">
         <div class="header clearfix">
-            <h3 class="text-muted txt-center">服务商信息列表</h3>
+            <h3 class="text-muted text-center">服务商信息列表</h3>
             <button type="button" class="btn btn-primary btn-import" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入
             </button>
@@ -75,6 +70,7 @@
                     <th>区</th>
                     <th>街道</th>
                     <th>道路</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody id="list_content">
@@ -109,8 +105,8 @@
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: base_path + "/api/serivce/import",
-                        data: {content:_content},
+                        url: base_path + "/api/service/import",
+                        data: {content:$('#import-content').val()},
                         dataType: "json",
                         error: function (request) {
                             info(request.responseJSON.ErrorMsg);
