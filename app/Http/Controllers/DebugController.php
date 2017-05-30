@@ -38,5 +38,4 @@ class DebugController{
 
         \Log::info('info');
     }
-
 }

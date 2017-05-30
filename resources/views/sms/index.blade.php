@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.model')
 
 @section('title', '短信记录')
 

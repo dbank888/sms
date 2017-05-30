@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.model')
 
 @section('title', '新建保险公司')
 

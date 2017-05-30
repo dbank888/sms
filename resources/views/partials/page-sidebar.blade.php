@@ -2,7 +2,7 @@
 <div id="sidebar-nav">
     <ul id="dashboard-menu">
         <li class="nav-index">
-            <a href="/home" target="mainFrame">
+            <a href="/index" target="mainFrame">
                 <i class="glyphicon glyphicon-home"></i>
                 <span>首页</span>
             </a>
@@ -34,12 +34,12 @@
             </a>
         </li>
 
-        <li class="nav-personInfo">
+        {{--<li class="nav-personInfo">
             <a href="/personInfo" target="mainFrame" >
                 <i class="glyphicon glyphicon-info-sign"></i>
                 <span>我的信息</span>
             </a>
-        </li>
+        </li>--}}
         <li class="nav-calender">
             <a href="/calendar" target="mainFrame" >
                 <i class="glyphicon glyphicon-calendar"></i>

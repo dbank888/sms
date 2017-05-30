@@ -43,15 +43,20 @@
         <li class="notification-dropdown hidden-xs hidden-sm">
         <li class="settings hidden-xs hidden-sm">
 
-            <a id="nav_person_info" role="button" target="mainFrame" data-title="person-info">
-                <span style="font-size: 16px;margin: 2px 15px 0 0;float: left;">maple.xia</span>
+            <a id="nav_person_info" role="button" data-title="短信分发记录">
+                <span style="font-size: 16px;margin: 2px 15px 0 0;float: left;">{{ Auth::user()->name }}</span>
                 <i class="glyphicon glyphicon-cog" ></i>
             </a>
         </li>
         <li class="settings hidden-xs hidden-sm">
-            <a href="/Page/logout" role="button" data-title="logout">
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+               document.getElementById('logout-form').submit();" role="button" data-title="退出">
                 <i class="glyphicon glyphicon-share-alt" ></i>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         </li>
     </ul>
 </header>

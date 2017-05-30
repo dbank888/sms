@@ -11,11 +11,6 @@
 |
 */
 
-Route::resource('company','CompanyController');
-Route::resource('service','ServiceProviderController');
-
-Route::get('smsList','PageController@smsList');
-
 //调试路由
 Route::resource('debug','DebugController');
 
@@ -25,21 +20,36 @@ Route::get('excel/import','ExcelController@import');
 
 Route::get('clearAllCache','CacheController@clearAllCache');
 
-//laravel
-Route::get('laravel', function () {
-    return view('page.welcome');
-});
+//auth
+Route::post('auth/login','Auth\LoginController@doLogin')->middleware('web');
 
-Route::get('home', function () {
-    return view('page.home');
-});
+/**page**/
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('home', function () {
+        return view('index.index');
+    })->name('home');
 
-Route::get('calendar', function () {
-    return view('page.calendar');
+    Route::get('index', function () {
+        return view('page.home');
+    });
+
+    Route::get('calendar', function () {
+        return view('page.calendar');
+    });
+
+    Route::resource('company','CompanyController');
+    Route::resource('service','ServiceProviderController');
+    Route::get('smsList','PageController@smsList');
+
+    //laravel
+    Route::get('laravel', function () {
+        return view('page.welcome');
+    });
 });
 
 Route::get('/', function () {
-    return view('index.index');
+    return redirect()->intended('home');
 })->middleware('whiteList');
 
+Auth::routes();
 

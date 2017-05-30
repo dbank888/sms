@@ -28,7 +28,7 @@
     @include('partials.changeTheme')
 
     <div style="margin:0; padding:2px; overflow:hidden;">
-        <iframe id="iframeMain" name="mainFrame" style="width:100%;" frameborder="0" src="/home" ></iframe>
+        <iframe id="iframeMain" name="mainFrame" style="width:100%;" frameborder="0" src="/index" ></iframe>
     </div>
 </div>
 
@@ -81,10 +81,9 @@
         var perpend_html = '<div class="pointer"> <div class="arrow"></div> <div class="arrow_border"></div> </div>';
         $('#dashboard-menu li').eq(0).addClass('active').prepend(perpend_html);
 
-        $('#dashboard-menu li ').click(function(){
-            $('#dashboard-menu li').removeClass('active');
+        $('#dashboard-menu li').click(function(){
             $('#dashboard-menu .pointer').remove();
-            $(this).addClass('active').prepend(perpend_html);
+            $(this).prepend(perpend_html);
         })
     })
 
