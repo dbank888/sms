@@ -8,11 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\ExcelHelper;
 use App\Helper\SmsHelper;
-use App\Models\CompanyModel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class DebugController{
 
@@ -26,7 +22,6 @@ class DebugController{
             echo 'no found';
         }
     }
-
 
     public function show(){
         $string = 'args=18815289976';
