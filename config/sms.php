@@ -7,10 +7,10 @@
  */
 
 return array(
-    'account'       => 'dxwelubon',
-    'password'      => '03D2C4A3EDBAC2976E026BDCDCD6',
-    'sign'          => '宁波易路邦网络',
-    'fetch_type'    => 'mo',
-    'send_type'     => 'pt',
-    'send_url'      => 'http://web.duanxinwang.cc/asmx/smsservice.aspx',
+    'account'       => env('SMS_ACCOUNT', null),
+    'password'      => env('SMS_PASSWORD', null),
+    'sign'          => env('SMS_SIGN', 'company'),
+    'fetch_type'    => env('SMS_FETCH_TYPE', 'mo'),
+    'send_type'     => env('SMS_SEND_TYPE', 'pt'),
+    'send_url'      => env('SMS_SEND_TYPE', 'http://web.duanxinwang.cc/asmx/smsservice.aspx'),
 );
