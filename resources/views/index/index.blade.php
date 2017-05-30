@@ -37,17 +37,18 @@
 @include('partials.js_basic')
 
 <script type="text/javascript">
+    var min_height = 600;
     function resetFrame(){
         var iframe = document.getElementById("iframeMain");
         try{
             var bHeight = iframe.contentWindow.document.body.scrollHeight;
             var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
             var height = Math.min(bHeight, dHeight);
-            iframe.height = height;
+            iframe.height = height > min_height ? height : min_height;
         }catch (ex){}
     }
 
-    var timer1 = window.setInterval("resetFrame()", 300); //定时开始
+    var timer = window.setInterval("resetFrame()", 300); //定时开始
 
     function reinitIframeEND(){
         var iframe = document.getElementById("iframeMain");
@@ -55,11 +56,13 @@
             var bHeight = iframe.contentWindow.document.body.scrollHeight;
             var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
             var height = Math.min(bHeight, dHeight);
-            iframe.height = height;
+            iframe.height = height > min_height ? height : min_height;
         }catch (ex){}
+
         // 停止定时
-        window.clearInterval(timer1);
+        window.clearInterval(timer);
     }
+
 
     $(function(){
         resetFrame();

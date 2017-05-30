@@ -12,10 +12,12 @@
             text-align: center;
         }
 
-
         .btn-new, .btn-import{
+            margin-right: 10px;
+        }
+
+        .btn-search{
             float: right!important;
-            margin: -30px 10px 0 0;
         }
     </style>
 @endsection
@@ -25,41 +27,51 @@
     <div class="container">
         <div class="header clearfix">
             <h3 class="text-muted text-center">保险公司信息列表</h3>
-            <button type="button" class="btn btn-primary btn-import" data-toggle="modal" data-target="#myModal">
-                <span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">数据批量导入</h4>
-                        </div>
-                        <form id="import-form">
-                            <div class="modal-body">
-                                <a class="btn btn-primary pull-right" href="/download/company.xlsx">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 下载导入模版
-                                </a>
-                                <div class="form-group">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-import" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">数据批量导入</h4>
+                                </div>
+                                <form id="import-form">
+                                    <div class="modal-body">
+                                        <a class="btn btn-primary pull-right" href="/download/company.xlsx">
+                                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 下载导入模版
+                                        </a>
+                                        <div class="form-group">
                                     <textarea id="import-content" class="form-control" rows="10"
                                               placeholder="必填项，下载填写模板文件，选择需要导入条目复制粘贴到本输入框"  data-error="请填写导入条目" required></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="import" type="submit" class="btn btn-primary">导入</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="modal-footer">
-                                <button id="import" type="submit" class="btn btn-primary">导入</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+                    <a class="btn btn-success btn-new" href="/company/create">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    {{--<a class="btn btn-success btn-search" ">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索
+                    </a>--}}
                 </div>
             </div>
-            <a class="btn btn-success btn-new" href="/company/create">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
-            </a>
         </div>
-        <div style="margin: 10px;">
+        <div>
             <table id="company-list" class="table table-hover table-striped">
                 <thead>
                 <tr>
@@ -90,9 +102,10 @@
 @section('customize_js')
     <script>
         $(document).ready(function() {
+            //auto loading
+            loadList(1);
 
             //event
-            $("#nav-company").addClass('active');
             $("#list-rows").change(function(){
                 loadList(1);
             })
@@ -133,9 +146,6 @@
                     })
                 }
             })
-
-            //auto loading
-            loadList(1);
         });
 
         function loadList(page){

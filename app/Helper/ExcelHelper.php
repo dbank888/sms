@@ -13,21 +13,31 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExcelHelper{
 
     /**
-     * Excel文件导出功能
+     * @param string $content
+     * @param string $filename
      */
-    public static function export(){
-        $cellData = [
-            ['no','name','score'],
-            ['10001','AAAAA','99'],
-            ['10002','BBBBB','92'],
-            ['10003','CCCCC','95'],
-            ['10004','DDDDD','89'],
-            ['10005','EEEEE','96'],
-        ];
-        Excel::create('Score',function($excel) use ($cellData){
-            $excel->sheet('score', function($sheet) use ($cellData){
-                $sheet->rows($cellData);
-            });
+    public static function export($content = "",$filename ="Excel"){
+        Excel::create($filename,function($excel) use ($content){
+            // Set the title
+            $excel->setTitle('title');
+
+            // set align center
+            $excel->getDefaultStyle()
+                ->getAlignment()
+                ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            // Chain the setters
+            /*$excel->setCreator('maple.xia')
+                ->setCompany('dbappsecurity');*/
+
+            // Call them separately
+            /*$excel->setDescription('A demonstration to change the file properties');*/
+
+            foreach($content as $key => $cellData){
+                $excel->sheet($key, function($sheet) use ($cellData){
+                    $sheet->rows($cellData);
+                });
+            }
         })->export('xls');
     }
 

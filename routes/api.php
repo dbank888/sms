@@ -17,6 +17,7 @@ Route::any('clearAllCache','ToolController@clearAllCache');
 
 //sms
 Route::any('sms/dataList','ApiSmsController@dataList');
+Route::get('sms/export','ApiSmsController@export');
 
 //company
 Route::post('company/dataList','ApiCompanyController@dataList');
