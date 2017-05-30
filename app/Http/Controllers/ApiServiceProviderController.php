@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\CommonHelper;
 use App\Helper\ImportHelper;
+use App\Models\CompanyModel;
 use App\Models\ServiceProviderModel;
 
 /**
@@ -112,7 +113,14 @@ class ApiServiceProviderController{
     public function delete(){
         $id = \Request::get('id');
         $this->service_provider->destroy($id);
+
+        $data = [
+            'service_id' => 0,
+            'mobile' => ""
+        ];
+        CompanyModel::where(['service_id' => $id])->update($data);
         $this->service_provider->clearAllCache();
+        CompanyModel::clearAllCache();
         return responseSuccess([],'删除成功');
     }
 

@@ -100,7 +100,7 @@ class ApiCompanyController{
         }
 
         $info = $this->company->with('service')->find($id);
-        $info->server_id = $info->service->id;
+        $info->server_id = isset($info->service->id) ? $info->service->id : 0;
 
         return responseSuccess(['info' => $info->toArray()]);
     }

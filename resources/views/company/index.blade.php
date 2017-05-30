@@ -173,7 +173,11 @@
                             html+="<td>"+item[i]['name']+"</td>";
                             html+="<td>"+item[i]['car_id']+"</td>";
                             html+="<td>"+item[i]['license']+"</td>";
-                            html+="<td>"+item[i]['service']['name']+"</td>";
+                            if(undefined != item[i].service){
+                                html+="<td>"+item[i]['service']['name']+"</td>";
+                            }else{
+                                html+="<td></td>";
+                            }
                             html+="<td>"+item[i]['mobile']+"</td>";
                             html+="<td>"+item[i]['updated_at']+"</td>";
                             html+= '<td><a class="btn btn-info" href="company/' + item[i]['id'] + '/edit" >编辑</a>' +

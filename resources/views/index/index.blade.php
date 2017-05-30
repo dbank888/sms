@@ -63,7 +63,6 @@
         window.clearInterval(timer);
     }
 
-
     $(function(){
         resetFrame();
 
