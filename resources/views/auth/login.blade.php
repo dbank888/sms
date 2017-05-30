@@ -56,7 +56,6 @@
     {!! HTML::script('js/login/scripts.js') !!}
 @endsection
 
-
 @section('customize_js')
 @endsection
 
