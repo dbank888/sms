@@ -8,9 +8,6 @@
 
 namespace {
 
-    use Illuminate\Support\Facades\Input;
-
-
     /************  global const *************/
     const ONE_DAY = 86400;  //一天的时间戳
 
@@ -87,6 +84,8 @@ namespace {
             $info = \Request::ip(). ' call open api function --'.$msg;
             Log::info($info,\Request::all());
             return true;
+
+
         }
     }
 
