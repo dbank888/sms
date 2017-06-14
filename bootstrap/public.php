@@ -84,7 +84,7 @@ namespace {
          * @return bool
          */
         function accessLog($msg = ''){
-            $info = \Request::server('REMOTE_ADDR'). ' call open api function '. Input::get('atn').'--'.$msg;
+            $info = \Request::ip(). ' call open api function --'.$msg;
             Log::info($info,\Request::all());
             return true;
         }
