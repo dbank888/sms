@@ -87,7 +87,7 @@ class CurlHelper{
                         curl_close($ch);
                     }
 
-                    \Log::info('Params:'.json_encode(\Request::all()).sprintf('Curl error (code %s): %s', $curlErrNo, $curlError));
+                    \Log::Error('Params:'.json_encode(\Request::all()).sprintf('Curl error (code %s): %s', $curlErrNo, $curlError));
                 }
 
                 sleep(10);

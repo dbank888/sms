@@ -12,5 +12,5 @@ return array(
     'sign'          => env('SMS_SIGN', 'company'),
     'fetch_type'    => env('SMS_FETCH_TYPE', 'mo'),
     'send_type'     => env('SMS_SEND_TYPE', 'pt'),
-    'send_url'      => env('SMS_SEND_TYPE', 'http://web.duanxinwang.cc/asmx/smsservice.aspx'),
+    'send_url'      => env('SEND_URL', 'http://web.duanxinwang.cc/asmx/smsservice.aspx'),
 );

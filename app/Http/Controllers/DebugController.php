@@ -24,13 +24,14 @@ class DebugController{
     }
 
     public function show(){
-        $string = 'args=18815289976';
+        //$string = 'args=18815289976';
 
-        $content = SmsHelper::getSmsContent();
+        //$content = SmsHelper::getSmsContent();
+        $content = '下行短信';
         $mobile = '18815289976';
         SmsHelper::sendSms($mobile,$content);
         //SmsHelper::fetchSms();
 
-        \Log::info('info');
+        \Log::info('send message');
     }
 }

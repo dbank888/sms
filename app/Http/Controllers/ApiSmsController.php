@@ -41,7 +41,7 @@ class ApiSmsController{
             unset($list['send']);
         }
 
-        \Cache::add('sms_export_list',$receive_lists,2*60);
+        \Cache::put('sms_export_list',$receive_lists,2*60);
         return responseSuccess(['list' => $receive_lists,'max_page' => $max_page]);
     }
 
