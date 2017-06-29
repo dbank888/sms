@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Input;
 
 class OpenApiController {
 
+    function __construct(){
+        accessLog();
+    }
+
     public function receiveSms(){
         /*$post = \Request::getContent();
 
