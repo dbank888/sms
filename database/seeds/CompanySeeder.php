@@ -26,7 +26,7 @@ class CompanySeeder extends Seeder
                 'car_id' => 'LSVAM4187C2184847'
             ]
         ];
-        $rs = DB::table('oauth_clients')->insert($insert);
+        $rs = DB::table('company')->insert($insert);
 
         echo "insert {$rs} rows";
     }

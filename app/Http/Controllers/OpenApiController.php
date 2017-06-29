@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 class OpenApiController {
 
     public function receiveSms(){
-        $post = \Request::getContent();
+        /*$post = \Request::getContent();
 
         if(is_array($post)){
             $post = current($post);
@@ -32,7 +32,18 @@ class OpenApiController {
         $sms_receive = new SmsReceiveModel();
         $sms_receive->mobile = substr($receive_info[0],5);
         $content = $receive_info[1];
+        $sms_receive->content = $content;*/
+
+        $post = \Request::only(['content','mobile']);
+        $content = $post['content'];
+        if(empty($post)){
+            return responseError(CODE_PARAMETER_ERROR,'短信接收失败');
+        }
+
+        $sms_receive = new SmsReceiveModel();
+        $sms_receive->mobile = $post['mobile'];
         $sms_receive->content = $content;
+
         $sms_receive->save();
 
         $target_number = SmsHelper::getTargetNumber($content);

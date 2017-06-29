@@ -55,9 +55,9 @@ namespace {
          */
         function responseSuccess($data = true, $msg = "", $url = ""){
             if(strlen($msg) > 0){
-                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'msg' => $msg, 'url' => $url]);
+                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'msg' => $msg, 'url' => $url,'success' => true]);
             }else{
-                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'url' => $url]);
+                return Response::json(['status' => CODE_SUCCESS, 'data' => $data, 'url' => $url,'success' => true]);
             }
         }
     }
