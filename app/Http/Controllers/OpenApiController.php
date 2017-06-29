@@ -38,14 +38,14 @@ class OpenApiController {
         $content = $receive_info[1];
         $sms_receive->content = $content;*/
 
-        $post = \Request::only(['content','mobile']);
-        $content = $post['content'];
+        $post = \Request::only(['body','smsFrom']);
+        $content = $post['body'];
         if(empty($post)){
             return responseError(CODE_PARAMETER_ERROR,'短信接收失败');
         }
 
         $sms_receive = new SmsReceiveModel();
-        $sms_receive->mobile = $post['mobile'];
+        $sms_receive->mobile = $post['smsFrom'];
         $sms_receive->content = $content;
 
         $sms_receive->save();
